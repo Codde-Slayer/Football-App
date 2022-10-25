@@ -3,8 +3,6 @@ import "../App.css"
 import Leagues from "./Leagues";
 import Standings from "./Standings";
 
-
-
 const Content = ()=> {
     const [active, setActive] = useState(true);
     const [league, setLeague] = useState(null) 
