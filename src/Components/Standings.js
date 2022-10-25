@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from "react";
 
-
-
 const Standings = ({league}) => {
     const [standings, setStandings] = useState(null);
 
@@ -15,7 +13,6 @@ const Standings = ({league}) => {
                 }
             );
     }, []);
-
 
     return (
         <div className="standings-container">

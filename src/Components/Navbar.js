@@ -1,7 +1,6 @@
 import "../App.css"
 import eact from "react"
 
-
 const Navbar = () => {
 
     return (
