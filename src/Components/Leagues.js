@@ -27,7 +27,6 @@ const Leagues = ({setLeague, setActive}) => {
                         )
             })}
 
-
                     </div>
                 )
             }
