@@ -19,9 +19,9 @@ const Leagues = ({setLeague, setActive}) => {
         <div className="leagues-container">
             {leagues?.map((league, i) => {
                 return (
-                    <div key={i} onClick={() => {setLeague(league); setActive(false)}} className="league-item">
-                        <h2 className="league-name">{league.name}</h2>
+                    <div key={i}  className="league-item">
                         <img src={league.logos.light} alt="league" />
+                        <h2 className="league-name">{league.name}</h2>
                         <p>{league.id}</p>
                         </div>
                         )

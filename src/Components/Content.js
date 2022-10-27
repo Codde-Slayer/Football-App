@@ -5,7 +5,7 @@ import Standings from "./Standings";
 
 const Content = ()=> {
     const [active, setActive] = useState(true);
-    const [league, setLeague] = useState(null) 
+
     return(
         <div className="content-container">
 
@@ -15,12 +15,12 @@ const Content = ()=> {
                     <h2 style={{ color: active ? "#c20114" : null}}>Leagues</h2>
                 </div>
 
-                <div className="tab-standings">
+                <div className="tab-standings" onClick={()=>setActive(false)}>
                     <h2 style={{ color: !active ? "#c20114" : null}}>Standings</h2>
                 </div>
 
             </div>
-        { active ? <Leagues setActive={setActive} setLeague={setLeague} /> : <Standings league={league} setLeague={setLeague}/>}
+        { active ? <Leagues/> : <Standings/> }
         </div>
     )
 }
