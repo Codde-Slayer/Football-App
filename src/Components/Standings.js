@@ -3,11 +3,27 @@ import React, {useState, useEffect} from "react";
 //import loader from "react-loader-spinner";
 
 const Standings = ({league}) => {
-    const [standings, setStandings] = useState(null);
+    const [standing, setStanding] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [selectedLeague, setSelectedLeague] = useState("eng.1")
-    const [selectedYear, setSelectedYear] = useState('2021')
-        
+    const [selectedYear, setSelectedYear] = useState('2021');
 
+    useEffect(()=>{
+        setLoading(true)
+        fetch(`https://api-football-standings.azharimm.dev/leagues/${selectedLeague}/standings?season=${selectedYear}`)
+            .then((response) => response.json())
+
+            .then(
+                (json) => {
+                    setStanding(json.data.standings);
+                    console.log(standing)
+                    console.log(standing)
+                }   
+            )
+            .catch((err) =>console.log(err))
+            .finally(() =>setLoading(false))
+    }, [selectedLeague,selectedYear]);
+    
     return (
         <div className="standings-container">
             
@@ -40,7 +56,12 @@ const Standings = ({league}) => {
                     <option value="uga.1">Ugandan Super League</option>
 
                 </select>
-                <select>
+                <select 
+                    name="select-year"
+                    id="select-year"
+                    defaultValue={selectedYear}
+                    onChange={(e) => setSelectedYear(e.target.value)}>
+
                     <option value="2011">2011</option>
                     <option value="2012">2012</option>
                     <option value="2013">2013</option>
@@ -58,13 +79,7 @@ const Standings = ({league}) => {
             <div className="standings-result"></div>
             
 
-
-
          </div> 
                 )}
-            
-       
-    
-
 
 export default Standings;
