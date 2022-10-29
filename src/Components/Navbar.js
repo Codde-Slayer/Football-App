@@ -4,12 +4,15 @@ import eact from "react"
 const Navbar = () => {
 
     return (
-        <div className="navbar">
+        <div>
+            <div className="navbar">
 
-        <h1>Football app ⚽</h1>
-
+                <h1>Futb⚽l</h1>
+            </div>
+            <div></div>
+            <img />
         </div>
-    
-    ); 
+
+    );
 }
 export default Navbar;

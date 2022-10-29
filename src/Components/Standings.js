@@ -1,14 +1,15 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 //import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 //import loader from "react-loader-spinner";
 
-const Standings = ({league}) => {
+const Standings = ({ league }) => {
     const [standing, setStanding] = useState([]);
+    const [standin, setStandin] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selectedLeague, setSelectedLeague] = useState("eng.1")
     const [selectedYear, setSelectedYear] = useState('2021');
 
-    useEffect(()=>{
+    useEffect(() => {
         setLoading(true)
         fetch(`https://api-football-standings.azharimm.dev/leagues/${selectedLeague}/standings?season=${selectedYear}`)
             .then((response) => response.json())
@@ -16,25 +17,26 @@ const Standings = ({league}) => {
             .then(
                 (json) => {
                     setStanding(json.data.standings);
+                    setStandin(json.data);
+                    console.log(standin)
                     console.log(standing)
-                    console.log(standing)
-                }   
+                }
             )
-            .catch((err) =>console.log(err))
-            .finally(() =>setLoading(false))
-    }, [selectedLeague,selectedYear]);
-    
+            .catch((err) => console.log(err))
+            .finally(() => setLoading(false))
+    }, [selectedLeague, selectedYear]);
+
     return (
         <div className="standings-container">
-            
+
             <div className="select-container">
                 <select
                     name="selet-league"
                     id="select-league"
                     defaultValue={selectedLeague}
                     onChange={(e) => setSelectedLeague(e.target.value)}
-                    >
-                    <option value="arg.1">Argentine Liga Profesional de Fútbol</option>   
+                >
+                    <option value="arg.1">Argentine Liga Profesional de Fútbol</option>
                     <option value="aus.1">Australian A-League</option>
                     <option value="bra.1">Brazilian Serie A</option>
                     <option value="chn.1">Chinese Super League</option>
@@ -56,7 +58,7 @@ const Standings = ({league}) => {
                     <option value="uga.1">Ugandan Super League</option>
 
                 </select>
-                <select 
+                <select
                     name="select-year"
                     id="select-year"
                     defaultValue={selectedYear}
@@ -76,10 +78,48 @@ const Standings = ({league}) => {
                     <option value="2022">2021</option>
                 </select>
             </div>
-            <div className="standings-result"></div>
-            
 
-         </div> 
-                )}
+            <div className="standings-result">
+
+                <div className="heading">
+                    <p>Rank</p>
+                    <p>Logo</p>
+                    <div className="team">Team</div>
+                    <span>G.P</span>
+                    <span>W</span>
+                    <span>L</span>
+                    <span>D</span>
+                    <span>G. Scored</span>
+                    <span>G. Against</span>
+                    <span>G. Differece</span>
+                    <span>Points</span>
+                </div>
+
+                {standing?.map((stan, i) => {
+                    return (
+                        <div>
+                            <div key={i} className="standing-item">
+
+                                <p>{stan?.stats[10]?.value}</p>
+                                <p><img src={stan?.team?.logos[0]?.href} /></p>
+                                <div className="team">{stan?.team?.name}</div>
+                                <span>{stan?.stats[0]?.value}</span>
+                                <span>{stan?.stats[6]?.value}</span>
+                                <span>{stan?.stats[1]?.value}</span>
+                                <span>{stan?.stats[5]?.value}</span>
+                                <span>{stan?.stats[4]?.value}</span>
+                                <span>{stan?.stats[3]?.value}</span>
+                                <span>{stan?.stats[8]?.value}</span>
+                                <span>{stan?.stats[2]?.value}</span>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+
+
+        </div>
+    )
+}
 
 export default Standings;
