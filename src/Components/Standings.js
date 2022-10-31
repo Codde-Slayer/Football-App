@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 //import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 //import loader from "react-loader-spinner";
 
-const Standings = ({ league }) => {
+const Standings = ({ championat }) => {
     const [standing, setStanding] = useState([]);
     const [standin, setStandin] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [selectedLeague, setSelectedLeague] = useState("eng.1")
+    const [selectedLeague, setSelectedLeague] = useState(championat ? championat.id : "eng.1")
     const [selectedYear, setSelectedYear] = useState('2021');
 
     useEffect(() => {

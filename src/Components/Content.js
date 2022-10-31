@@ -5,6 +5,7 @@ import Standings from "./Standings";
 
 const Content = ()=> {
     const [active, setActive] = useState(true);
+    const [league, setLeague] = useState(null)
 
     return(
         <div className="content-container">
@@ -20,7 +21,7 @@ const Content = ()=> {
                 </div>
 
             </div>
-        { active ? <Leagues/> : <Standings/> }
+        { active ? <Leagues setActiveChampionat={setActive} setChampionat={setLeague} /> : <Standings championat={league}/> }
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 
-const Leagues = ({setLeague, setActive}) => {
+const Leagues = ({setChampionat, setActiveChampionat}) => {
     const [leagues, setLeagues] = useState([]);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const Leagues = ({setLeague, setActive}) => {
         <div className="leagues-container">
             {leagues?.map((league, i) => {
                 return (
-                    <div key={i}  className="league-item">
+                    <div key={i} onClick={() => {setChampionat(league); setActiveChampionat(false) }}  className="league-item">
                         <img src={league.logos.light} alt="league" />
                         <h2 className="league-name">{league.name}</h2>
                         <p>{league.id}</p>
